@@ -33,13 +33,33 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
+
+
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
 	//from the JSON string
-	console.log('swap photo');
-}
+	document.getElementById("photo").src = mImages[mCurrentIndex].img
 
+	let location = document.getElementsByClassName("location")
+	let description = document.getElementsByClassName("description")
+	let data = document.getElementsByClassName("data")
+	description = "description" + mImages[mCurrentIndex].description
+	location = "location" + mImages[mCurrentIndex].location
+	data = "data" + mImages[mCurrentIndex].data
+	let mLastFrameTime = 0;
+	mCurrentIndex +=1;
+}
+function iterateJSON(){
+	for( i = 0; i <= mJson.mImages.length; i++ ){
+			if(mCurrentIndex>=mImages.length){
+				mCurrentIndex = 0;
+			}
+			if(mCurrentIndex < 0){
+				mCurrentIndex = mImages.length - 1;
+			}
+	}
+}
 // Counter for the mImages array
 var mCurrentIndex = 0;
 
@@ -70,7 +90,7 @@ $(document).ready( function() {
 	
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
-	
+	fetchJSON()
 });
 
 window.addEventListener('load', function() {
@@ -80,10 +100,10 @@ window.addEventListener('load', function() {
 }, false);
 
 function GalleryImage() {
-	let location = "imgLocation";
-	let description = "description";
-	let date = "date";
-	let Img = "imgPath";
+	let location;
+	let description;
+	let date;
+	let Img;
 	
 	//implement me as an object to hold the following data about an image:
 	//1. location where photo was taken
@@ -91,19 +111,16 @@ function GalleryImage() {
 	//3. the date when the photo was taken
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 }
-function fetchJASON(){
-	mRequest.onreadystatechange()= function(){
-		if(mRequest.readyState === 4 && mRequest.status === 200){
-			let responseText = JSON.parse(mRequest.responseText)
-		}else(){
-			counsole.log(";lasj")
+function fetchJSON(){
+	mRequest.onreadystatechange =()=>{
+		if(mRequest.readyState == 4 && mRequest.status == 200){
+			let mJson = JSON.parse(mRequest.responseText)
+			console.log("work mmmmhh yes")
+		}else{
+			console.log(";lasj")
 		}
-	}
+		}
 
-}	
-mRequest.open("GET", "mUrl", true)
+mRequest.open("GET", "mUrl")
 mRequest.send()
-
-function swapPhoto(){
-	
 }
