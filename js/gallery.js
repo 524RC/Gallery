@@ -41,7 +41,7 @@ window.requestAnimFrame = (function () {
   
   function swapPhoto() {
 	// Increment the current index
-	mCurrentIndex++;
+
 	// Check if the current index is greater than or equal to the length of mImages
 	if (mCurrentIndex >= mImages.length) {
 	  // Set the current index back to 0
@@ -89,7 +89,7 @@ window.requestAnimFrame = (function () {
   
   // URL for the JSON to load by default
   // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-  var mUrl = 'images.json';
+  var mUrl = 'extra.json';
   
   
   
@@ -176,55 +176,44 @@ window.requestAnimFrame = (function () {
   }
   
 
-
-  $(document).ready(function(){
-	// Click handler for img.moreIndicator
-	$('img.moreIndicator').click(function(){
-	  let $indicator = $(this);
-	  let $details = $('.details');
-	  // Toggle rotation classes
-	  if ($indicator.hasClass('rot90')) {
-		$indicator.removeClass('rot90').addClass('rot270');
-	  } else {
-		$indicator.removeClass('rot270').addClass('rot90');
-	  }
-	  // Slide down/up details div
-	  $details.slideToggle();
-	});
+  $(document).ready(function () {
+	// This initially hides the photos' metadata information
+	//$(".details").eq(0).hide();
   
   
-	// Offset #nextPhoto to the right side of #nav div
-	$('#nextPhoto').position({
-	  my: 'right',
-	  at: 'right',
-	  of: '#nav'
-	});
+  $(".moreIndicator").on("click", function () {
+	if ($(".moreIndicator").hasClass("rot90")){
+	  $(".moreIndicator").removeClass('rot90').addClass("rot270")
+	} else{
+	  $(".moreIndicator").removeClass("rot270").addClass("rot90")
+	}
   
   
-	// Click handler for navigating to the next photo
-	$('#nextPhoto').click(function() {
-	  let $currentIndex = $('.thumbnail');
-	  let $nextPhoto = $currentIndex.next('.thumbnail');
-	  if ($nextPhoto.length === 0) {
-		$nextPhoto = $('.thumbnail').first();
-	  }
-	  $nextPhoto.hide();
-	  $nextPhoto.show();
-	});
-  
-  
-	// Click handler for navigating to the previous photo
-	$('#prevPhoto').click(function() {
-	  let $currentIndex = $('.thumbnail');
-	  let $prevPhoto = $currentIndex.prev('.thumbnail');
-	  if ($prevPhoto.length === 0) {
-		$prevPhoto = $('.thumbnail').last();
-	  }
-	  $nextPhoto.hide();
-	  $prevPhoto.show();
-	});
+	$('.details').slideToggle();
+   
   });
   
   
   
   
+  
+  
+  $('#nextPhoto').position({  
+	my: 'right',
+	at: 'right',
+	of: '#nav'
+  });
+  
+  
+  // Click handler for navigating to the next photo
+  $("#nextPhoto").on("click", function () {
+	mCurrentIndex++
+	swapPhoto()
+  });
+  
+  
+  $("#prevPhoto").on("click", function () {
+	  mCurrentIndex = mCurrentIndex - 2;
+	  swapPhoto()
+	});
+});
