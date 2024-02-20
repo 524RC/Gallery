@@ -1,17 +1,20 @@
 body {
 	overflow: auto;
-	font-family: 'Century Gothic', sans-serif;
-	background-image: url(../img/blue.jpg);
+	background-repeat: no-repeat;
+	background-size:cover;
+	font-family: 'papyrus', fantasy;
+	font-size:25px;
+	background-image: url(../img/dark-blue-product-background_53876-92801.avif);
 }
 
 #photoBooth {
-	margin-top: .2em;
+	margin-top: 50px;
 	padding: 10px;
 	width: 650px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: white;
-	border-radius: 2px;
+	background-color: rgb(221, 221, 221);
+	border-radius:15px;
 }	
 
 #slideShow {	
@@ -43,6 +46,9 @@ body {
 
 
 .banner {
+	color:rgb(170, 197, 199);
+	border-radius:15px;
+	background-color:rgb(94, 94, 114);
 	text-align: center;
 	font-size: 1.25em;
 }
@@ -66,7 +72,9 @@ body {
 	margin-top: 20px;
 }
 .details {
-	border: 1px #000 dashed;
+	color:rgb(81, 101, 102);
+	border-radius: 15px;
+	border: 5px rgb(94, 94, 114) dashed;
 	padding: 0px 10px;
 	margin: 20px 0px;
 }
